@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+body{
+    background: gray;
+    padding-top: 65px;
+}
+#carousel1{
+    width: 10vw;
+    height: 43vw;
+}
+#carousel2{
+    width: 5vw;
+    height: 43vw;
+}
+#carousel3{
+    width: 5vw;
+    height: 43vw;
+}
