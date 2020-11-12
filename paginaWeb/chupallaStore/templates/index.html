@@ -22,7 +22,6 @@
         {% block javascript%}{% endblock %}
     </head>
     <body> 
-        <div class="container-fluid">
             <!--Navbar-->
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
                 <img src="{% static 'images/icono.png' %}" width="60px" height="50px" alt="">
@@ -44,6 +43,9 @@
                         <ul class="navbar-nav"></ul>
                         {% if user.is_authenticated %}
                             <li class="nav-item nav-link" style="color:#FFFFFF";><strong>Usuario: {{user.get_username}}</strong></li>
+                            {% if user.is_staff %}
+                                <li class="nav-item "><a href="admin" class="nav-link"><strong>Administracion</strong></a></li>
+                            {% endif %}
                             <li class="nav-item "><a href="{% url 'logout' %}" class="nav-link"><strong>Logout</strong></a></li>
                         {% else %}
                             <li class="nav-item "><a href="{% url 'login' %}?next={{request.path}}" class="nav-link"><strong>Login</strong></a></li>
@@ -96,56 +98,35 @@
                 </a>
             </div>
             <br>
+            <div class="container-fluid">
             <!--Productos-->
             <div class="row justify-content-center">
                 <h1 style="color: white">Productos</h1>
             </div>
-            <br>
-            <div class="card-deck">
-                <div class="card">
-                    <img src="{% static 'images/P1.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Chupalla Mimbre Artesanal</h5>
-                        <p class="card-text">Chupalla de mibre fabricada por artesanos del sur de chile, esta confeccionada con mibre de la más alta calidad.<br><br>
-                        <strong>Precio: $37.990</strong></p>
-                        <p>
-                                <a class="btn btn-primary" href="#">Comprar</a>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{% static 'images/espuelas.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Espuelas Lisas Corraleras Riel 5 Pul</h5>
-                        <p class="card-text">Par espuelas Corraleras Lisas asta y pihuelo acero inoxidable Rodaja Riel 5 Pulgadas.<br><br>
-                        <strong>Precio: $89.990</strong></p>
-                        <p>
-                            <a class="btn btn-primary" href="#">Comprar</a>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="{% static 'images/poncho.jpg' %}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Poncho Adulto</h5>
-                        <p class="card-text">Poncho para adultos 100% lana de oveja tejido a mano, producido en Valdivia.<br><br>
-                        <strong>Precio: $89.990</p>
-                        <p>
-                            <a class="btn btn-primary" href="#">Comprar</a>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+            <div class="row justify-content-center">
+                <div class="col-11">
+                    <div class="row">
+                        {% for product in products %}
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <div class="card" style="width: 100%;">
+                                <img src="{{ product.image.url }}" style="width:100%;" class="card-img-top"
+                                    alt="{{ product.name }}" />
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="card-text"> {{product.excerpt}} <br><br><strong> Precio: ${{product.price}} </strong>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <a class="btn btn-primary" href="#">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
+            </div>
             {% endblock %}
-        </div>
+        
     </body>
 </html>

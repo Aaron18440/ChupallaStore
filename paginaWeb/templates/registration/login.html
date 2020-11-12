@@ -10,9 +10,6 @@
 			background: white;
 		}
 	</style>
-	{% if form.errors %}
-		<p>Usuario o clave no son válidas para el ingreso.</p>
-	{% endif %}
 	<div class="container-fluid">
 		<br><br><br>
 		<div class="row justify-content-center">
@@ -21,6 +18,11 @@
 		<br><br>
 		<form action="{% url 'login' %}" method="post">
 			{% csrf_token %}
+			{% if form.errors %}
+				<div class="offset-md-5 offset-lg-5">
+					<p style="color:red";>*  Usuario o clave no son válidas para el ingreso.</p>
+				</div>
+			{% endif %}
 			<div class="row">
 				<div class="col-12 col-md-1 offset-md-4">
 					Username

@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index,name='index'),
     path('index', views.index,name='index'),
     path('registrar', views.registrar,name='registrar'),
+    path('lista',views.listado_productos,name='lista')
 ]
 # 127.0.0.1:8000/plantilla
 # 127.0.0.1:8000/plantillaBase

@@ -1,0 +1,84 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-sm-12 col-md-3 col-lg-4">
+                        <div class="card" style="width: 100%;">
+                            <img src="{{ product.image.url }}" style="width:100%;" class="card-img-top" alt="{{ product.name }}" />
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text"> {{product.excerpt}} <br><strong> Precio: ${{product.price}} </strong></p>
+                            </div>
+                            <div>
+                                <a class="btn btn-primary" href="#">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-3">
+            {% comment %} widget de los productos que hay en el carrito {% endcomment %}
+        </div>
+    </div>
+    <!--PRODUCTOS 2-->
+    <div class="card-deck">
+        {% for product in products %}
+                <div class="card col-sm-12 col-md-3 col-lg-3" style="width: 100%;">
+                    <img src="{{ product.image.url }}" style="width:100%;" class="card-img-top"
+                        alt="{{ product.name }}" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text"> {{product.excerpt}} <br><strong> Precio: ${{product.price}} </strong></p>
+                    </div>
+                    <div>
+                        <a class="btn btn-primary" href="#">Comprar</a>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    <!--PRODUCTOS 3-->
+    <div class="col-9">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-sm-12 col-md-3 col-lg-4">
+                <div class="card" style="width: 100%;">
+                    <img src="{{ product.image.url }}" style="width:100%;" class="card-img-top" alt="{{ product.name }}" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text"> {{product.excerpt}} <br><br><strong> Precio: ${{product.price}} </strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary" href="#">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!--PRODUCTOS 4-->
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="card" style="width: 100%;">
+                        <img src="{{ product.image.url }}" style="width:100%;" class="card-img-top" alt="{{ product.name }}" />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text"> {{product.excerpt}} <br><br><strong> Precio: ${{product.price}} </strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="#">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
