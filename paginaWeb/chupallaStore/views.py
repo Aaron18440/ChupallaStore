@@ -31,3 +31,6 @@ def listado_productos(request):
     return render(request, "listado.html", {
         "products":products
     })
+
+def notificacion(request):
+    return render(request, "notificacion.html")

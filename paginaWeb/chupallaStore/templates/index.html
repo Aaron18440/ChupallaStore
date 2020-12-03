@@ -37,9 +37,10 @@
                     <form class="form-inline my-2 my-lg-0">  
                         <ul class="navbar-nav"></ul>
                         {% if user.is_authenticated %}
+                            <script src="{% static 'js/notificacion.js' %}"></script>
                             <li>
                                 {% for auth in backends.associated %}
-                                
+
                                     {% if auth.provider == 'facebook' %}
                                         <img  class="rounded-circle" src="{{ auth.extra_data.picture.data.url }}" alt="" width="50" height="50">
                                     {% endif %}
@@ -104,6 +105,7 @@
             <br>
             <div class="container-fluid">
             <!--Productos-->
+            {% load humanize %}
             <div class="row justify-content-center">
                 <h1 style="color: white">Productos</h1>
             </div>
@@ -117,7 +119,7 @@
                                     alt="{{ product.name }}" />
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.name }}</h5>
-                                    <p class="card-text"> {{product.excerpt}} <br><br><strong> Precio: ${{product.price}} </strong>
+                                    <p class="card-text"> {{product.excerpt}} <br><br><strong> Precio: ${{product.price | intcomma}} </strong>
                                     </p>
                                 </div>
                                 <div class="card-footer">

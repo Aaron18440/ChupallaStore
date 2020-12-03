@@ -15,9 +15,10 @@ class CategoryAdmin (admin.ModelAdmin):
     search_fields = ['name']
 
 class ProductAdmin (admin.ModelAdmin):
-    list_display = ['name', 'category','image']
-    list_display_links = ['name', 'category','image']
-    list_filter = ['name','category']
+    list_display = ['name', 'category','price','image','available']
+    list_editable = ['price']
+    list_display_links = ['name', 'category','image','available']
+    list_filter = ['name','category','available']
     search_fields = ['name']
 
 admin.site.register(Marca, MarcaAdmin)

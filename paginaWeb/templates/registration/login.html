@@ -28,34 +28,30 @@
 					Usuario
 				</div>
 				<div class="col-12 col-md-4 col-xl-3">
-					<input type="text" name="username" class="form-control" placeholder="Ej: Ejemplo123"
-						required>
+					<input type="text" name="username" class="form-control" placeholder="Ej: Ejemplo123" required>
+					
 				</div>
 			</div>
 			<br>
-			<div class="row">
+			<div class="row ">
 				<div class="col-12 col-md-1 offset-md-4">
 					Clave
 				</div>
 				<div class="col-12 col-md-4 col-xl-3">
 					<input type="password" name="password" class="form-control" required>
-				</div>
-			</div>
-			<br>
-			<div class="row"> 
-				<a class="btn btn-primary col-12 col-md-4 col-xl-3 offset-md-5" href="{% url 'social:begin' 'facebook' %}" role="button">Iniciar con facebook</a>
-			</div>
-			<br>
-			<a href="{% url 'password_reset' %}" class="col-12 col-md-1 offset-md-5 offset-xl-5">Olvide mi contraseña</a>
-			<br>
-			<div class="row">	
-				<div class="col-12 col-sm-2 col-md-1 offset-md-5 offset-xl-5">
-					Opciones
-				</div>
-				<div class="col-12 col-md-3">
-					<input type="reset" name="btnLimpiar" class="btnLimpiar btn btn-dark" value="Limpiar">
-					<input type="submit" name="btnEnviar" class="btnEnviar btn btn-success" value="Enviar">
-					<input type="hidden" name="btnNext" value="{{next}}">
+					<br>
+					<a href="{% url 'password_reset' %}" class="">Olvide mi contraseña</a>
+					<br>
+					<a class="btn btn-primary btn-block " href="{% url 'social:begin' 'facebook' %}"
+						role="button">Iniciar con facebook</a>
+					<div class="">
+						Opciones
+					</div>
+					<div class="">
+						<input type="reset" name="btnLimpiar" class="btnLimpiar btn btn-dark" value="Limpiar">
+						<input type="submit" name="btnEnviar" class="btnEnviar btn btn-success" value="Enviar">
+						<input type="hidden" name="btnNext" value="{{next}}">
+					</div>
 				</div>
 			</div>
 		</form>
