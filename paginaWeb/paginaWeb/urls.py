@@ -26,10 +26,12 @@ urlpatterns = [
     path('login', auth_views.LoginView.as_view(redirect_authenticated_user=True)),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    path('social-auth/', include('social_django.urls', namespace="social")),
     #path('chupallaStore/', include('chupallaStore.urls')),
     #127.0.0.1:8000/chupallaStore/
     #opcional
     path('', include('chupallaStore.urls')),
+    path('', include('pwa.urls')),
     path('reset/password_reset', PasswordResetView.as_view(template_name='registration/password_reset_forms.html', email_template_name="registration/password_reset_email.html"), name = 'password_reset'),
     path('reset/password_reset_done', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name = 'password_reset_done'),
     re_path(r'^reset/(?P<uidb64>[0-9A-za-z_\-]+)/(?P<token>.+)/$', PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirms.html'), name = 'password_reset_confirm'),

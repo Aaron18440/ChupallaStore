@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = '1ct413&i7f)yi#p8y5bgy_=5r^n7)1_@&a-s&h2=jqvf6a_gw_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chupallaStore',
+    'crispy_forms',
+    'rest_framework',
+    'social_django',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'paginaWeb.urls'
@@ -62,10 +68,34 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages',          
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
+]
+
+#obtener campos adicionales desde facebook
+#con esta configuracion podemos traer el email y la imagen
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] 
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {  
+  'fields': 'id, name, email, picture.type(large), link'
+}
+
+
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [               
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 WSGI_APPLICATION = 'paginaWeb.wsgi.application'
@@ -123,6 +153,13 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'index' #PAGINA A ENVIAR UNA VEZ LOGEADO.
 LOGOUT_REDIRECT_URL = 'login' #PAGINA PARA EL INICIO DE SESIÓN. 
 
+#Facebook login
+SOCIAL_AUTH_FACEBOOK_KEY = "4725336114208432"
+SOCIAL_AUTH_FACEBOOK_SECRET = "4e092cd910cd41d75da9942c2820d5a3"
+
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+LOGIN_ERROR_URL = '/login'
+
 #CAMBIO DE CONTRASEÑA
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -130,3 +167,17 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'chupallastore@gmail.com'
 EMAIL_HOST_PASSWORD = 'chupalla123'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+PWA_APP_NAME = "ChupallaStore"
+PWA_APP_DESCRIPTION = "pagina para chupallas"
+PWA_APP_THEME_COLOR = "#3477f5"
+PWA_APP_BACKGROUND_COLOR = "#6699f7"
+
+PWA_APP_ICONS = [
+    {
+        "src": "/static/images/logo.png",
+        "sizes": "160x160"
+    }
+]
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR,"serviceworker.js")
